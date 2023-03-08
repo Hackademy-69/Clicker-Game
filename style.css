@@ -1,0 +1,50 @@
+body{
+  background-color: rgb(241, 251, 143);
+}
+
+
+
+
+/* Leaf */
+.leaf-custom{
+
+  height: 20vh;
+  width: 20vh;
+  cursor: pointer;
+  scale: 1;
+  
+}
+
+.click-custom:active{
+  scale: 0.98;
+}
+
+/* Counter */
+.count-custom{
+  color: green;
+  font-weight: 400;
+}
+
+/* icon coins */
+.icon-color{
+  color: rgb(196, 190, 19);
+}
+
+/* button */
+.button{
+  text-align: center;
+  font-size: 40px;
+  height: 80px;
+  width: 320px;
+  font-weight: 500;
+  background-color: rgba(0, 248, 0, 0.298);
+  border: 2px solid rgb(2, 59, 2);
+  border-radius: 10px;
+}
+.button:hover{
+  cursor: pointer;
+}
+
+.button:active{
+  scale: 0.96;
+}
