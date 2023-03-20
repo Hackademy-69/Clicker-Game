@@ -52,6 +52,25 @@ body{
   color: rgb(196, 190, 19);
 }
 
+/* reset button */
+.resetButton{
+  background-color: white;
+  margin-top: 10px;
+
+  height: 40px;
+  width: 100%;
+
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.resetButton:hover{
+  cursor: pointer;
+  font-size: 27px;
+}
+
 /* button */
 
 .button-size{
