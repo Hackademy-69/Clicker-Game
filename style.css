@@ -13,11 +13,33 @@ body{
   cursor: pointer;
   scale: 1;
   
+  
 }
 
 .click-custom:active{
   scale: 0.98;
 }
+
+
+/* sidebar */
+
+.sidebar{
+  background-color: rgba(179, 255, 0, 0.337);
+  width: 16vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.container-side{
+  width: 16vw;
+  height: 100vh;
+}
+
+
+
+
+
+
 
 /* Counter */
 .count-custom{
@@ -31,11 +53,30 @@ body{
 }
 
 /* button */
+
+.button-size{
+  width: 98%;
+}
+
+.custom-text{
+  height: 50%;
+  margin-right: 10px;
+  font-size: calc(0.2rem + 0.7vw);
+  align-self: end;
+  
+}
+
+.custom-title{
+  height: 40px;
+  margin-left: 10px;
+  font-size: calc(0.5rem + 0.9vw);
+  text-align: start;
+  align-self: start;
+}
+
 .button{
-  text-align: center;
-  font-size: 40px;
   height: 80px;
-  width: 320px;
+  width: 100%;
   font-weight: 500;
   background-color: rgba(0, 248, 0, 0.298);
   border: 2px solid rgb(2, 59, 2);
@@ -47,4 +88,18 @@ body{
 
 .button:active{
   scale: 0.96;
+}
+
+
+
+
+
+@media (max-width: 1200px) {
+
+  .custom-text{
+    font-size: calc(0.2rem + 0.9vw);
+  }
+  .custom-title{
+    font-size: calc(0.5rem + 1vw);
+  }
 }
