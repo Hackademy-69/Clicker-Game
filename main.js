@@ -1,12 +1,20 @@
-let clickCounter = document.querySelector('#count');
+let coinsCounter = document.querySelector('#count');
 let leaf = document.querySelector('#Leaf');
 
-let upgradeBtn = document.querySelector('#upgradeBtn');
-let clickCost = document.querySelector('#clickCost');
+// upgrade clicks
+let upgradeClickPowerBtn = document.querySelector('#upgradeClickPowerBtn');
+let clickCostIndicator = document.querySelector('#clickCostIndicator');
 
-let clickBtn = document.querySelector('#clickBtn');
+// power indicator
+let powerInd = document.querySelector('#powerInd');
 
+// resetbtn
 let resetBtn = document.querySelector('#resetBtn');
+
+// coins per second 1 st upgrade
+let coinsPerSecCounter = document.querySelector('#coinsPerSec');
+let CPSCostCounter = document.querySelector('#CPSCostCounter')
+let CPSUpgrade1 = document.querySelector('#upgradeCPS1')
 
 
 // coin data 
@@ -15,7 +23,7 @@ let coins;
 
 console.log(+localStorage.getItem('Coins'));
 
-clickCounter.innerHTML = coins;
+coinsCounter.innerHTML = coins;
 
 // click power data
 let clickPower;
@@ -24,14 +32,57 @@ let clickPower;
 // upgrade cost data
 let upgradeCost;
 +localStorage.getItem('upgradeCost') > 0 ? upgradeCost = +localStorage.getItem('upgradeCost') : upgradeCost = 10;
-clickCost.innerHTML = "Cost: " +  upgradeCost;
-clickBtn.innerHTML = 'Power : ' + clickPower;
+clickCostIndicator.innerHTML = "Cost: " +  upgradeCost;
+powerInd.innerHTML = 'Power : ' + clickPower;
 
+// coins per second data
+let coinsPerSecond;
++localStorage.getItem('coinsPerSecond') > 0 ? coinsPerSecond = +localStorage.getItem('coinsPerSecond') : coinsPerSecond = 0;
+coinsPerSecCounter.innerHTML = "Coins/s : " + coinsPerSecond;
+
+// cps cost data
+let CPSCost1;
++localStorage.getItem('CPSCost1') > 0 ? CPSCost1 = +localStorage.getItem('CPSCost1') : CPSCost1 = 100;
+CPSCostCounter.innerHTML = "Cost : " + CPSCost1;
 
 
 
 
 // functions
+
+// button colors on coins 
+
+function updateColor(){
+
+
+    if(upgradeCost <= coins){
+        upgradeClickPowerBtn.classList.add("valid");
+        upgradeClickPowerBtn.classList.remove("notvalid");
+    }else{
+        upgradeClickPowerBtn.classList.add("notvalid");
+        upgradeClickPowerBtn.classList.remove("valid");
+    }
+
+    
+
+    if(CPSCost1 <= coins){
+        CPSUpgrade1.classList.add("valid");
+        CPSUpgrade1.classList.remove("notvalid");
+    }else{
+        CPSUpgrade1.classList.add("notvalid");
+        CPSUpgrade1.classList.remove("valid");
+    }
+
+    setTimeout(updateColor, 100);
+    
+}
+
+updateColor();
+
+
+
+
+
 
 // reset button
 resetBtn.addEventListener('click', ()=>{
@@ -44,7 +95,7 @@ resetBtn.addEventListener('click', ()=>{
 // clicker
 leaf.addEventListener('click', ()=>{
     coins += clickPower;
-    clickCounter.innerHTML = coins;
+    coinsCounter.innerHTML = coins;
 
 
 
@@ -53,23 +104,67 @@ leaf.addEventListener('click', ()=>{
 })
 
 // upgrade clicker
-upgradeBtn.addEventListener('click', ()=>{
+upgradeClickPowerBtn.addEventListener('click', ()=>{
    
     if(coins >= upgradeCost){
 
-        clickCounter.innerHTML = coins -= upgradeCost;
-        upgradeCost = Math.round(upgradeCost * 1.73);
+        coinsCounter.innerHTML = coins -= upgradeCost;
+        upgradeCost = Math.round(upgradeCost * 1.56);
+
         localStorage.setItem('upgradeCost', upgradeCost);
         localStorage.setItem("Coins", coins);
 
-        clickCost.innerHTML = "Cost: " +  upgradeCost;
+        clickCostIndicator.innerHTML = "Cost: " +  upgradeCost;
         
         clickPower = Math.ceil(clickPower * 1.4);
         localStorage.setItem('clickPower', clickPower); 
 
-        clickBtn.innerHTML = 'Power : ' + clickPower;
+        powerInd.innerHTML = 'Power : ' + clickPower;
     }
 })
 
+// upgrade coins per second
+let isFirstClick = true;
 
+CPSUpgrade1.addEventListener('click', ()=>{
+
+
+    if(coins >= CPSCost1){
+
+        coinsCounter.innerHTML = coins -= CPSCost1;
+        CPSCost1 = Math.round(CPSCost1 * 1.68);
+
+        if(isFirstClick){
+            coinsPerSecond = 1;
+            isFirstClick = false;
+        }else{
+            coinsPerSecond = coinsPerSecond + Math.round(coinsPerSecond * 1.58);
+        }
+        
+        localStorage.setItem("Coins", coins);
+        localStorage.setItem("CPSCost1", CPSCost1);
+        localStorage.setItem("coinsPerSecond", coinsPerSecond);
+        
+        CPSCostCounter.innerHTML = "Cost : " + CPSCost1;
+        coinsPerSecCounter.innerHTML = "Coins/s : " + coinsPerSecond;
+
+    }
+
+    let hasAddedCoins = false;
+
+    setInterval(function() {
+    if (!hasAddedCoins) {
+        coins += coinsPerSecond;
+        hasAddedCoins = true;
+        
+        localStorage.setItem("Coins", coins);
+        coinsCounter.innerHTML = coins;
+    }
+    }, 900);
+
+    setInterval(function() {
+    hasAddedCoins = false;
+    }, 1400);
+    
+})
 

@@ -23,12 +23,21 @@
           <div class="container-side">
             
             <!-- upgrade buttons -->
-            <div class="sidebar">
+            <div class="sidebar d-flex flex-column align-items-center justify-content-start">
               
                 <div class="button-size">
-                  <div id="upgradeBtn" class="button d-flex flex-column">
+                  <div id="upgradeClickPowerBtn" class="button d-flex flex-column">
                     <h2 class="custom-title">Uprade click power</h2>
-                    <h3 id="clickCost" class="custom-text">Cost : 10</h3>
+
+                    <h3 id="clickCostIndicator" class="custom-text">Cost : 10</h3>
+                  </div>
+                </div>
+
+                <div class="button-size ">
+                  <div id="upgradeCPS1" class="button d-flex flex-column">
+                    <h2 class="custom-title">Auto Clickers! <h6 class="ms-2">Idle coins.</h6> </h2>
+                    
+                    <h3 id="CPSCostCounter" class="custom-text">Cost : 100</h3>
                   </div>
                 </div>
         
@@ -63,7 +72,8 @@
         Reset Data
         </div>
 
-        <h3 id="clickBtn">Power : 1</h3>
+        <h3 id="powerInd">Power : 1</h3>
+        <h3 id="coinsPerSec">Coins/s : 0</h3>
 
       </div>
 
